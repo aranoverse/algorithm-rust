@@ -29,6 +29,17 @@ impl Solution {
 
         step_ways[n as usize] as i32
     }
+
+    pub fn climb_stairs_v2(n: i32) -> i32 {
+        let mut step_ways = vec![0, 1, 2];
+
+        for idx in 3..=n as usize {
+            step_ways.push(step_ways[idx - 1] + step_ways[idx - 2]);
+        }
+
+
+        step_ways[n as usize] as i32
+    }
 }
 
 #[cfg(test)]
@@ -42,6 +53,13 @@ mod tests {
     #[test_case(4, 5;)]
     fn test_climb_stairs(steps: i32, ways: i32) {
         assert_eq!(Solution::climb_stairs(steps), ways);
+    }
+
+    #[test_case(2, 2;)]
+    #[test_case(3, 3;)]
+    #[test_case(4, 5;)]
+    fn test_climb_stairs_v2(steps: i32, ways: i32) {
+        assert_eq!(Solution::climb_stairs_v2(steps), ways);
     }
 }
 
