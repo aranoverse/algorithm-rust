@@ -1,14 +1,7 @@
 use crate::solution::Solution;
 
 impl Solution {
-    pub fn climb_stairs_recurse(n: i32) -> i32 {
-        if 0 <= n && n <= 2 {
-            return n;
-        }
-
-        Self::climb_stairs(n - 1) + Self::climb_stairs(n - 2)
-    }
-
+    /// https://leetcode.com/problems/climbing-stairs/
     pub fn climb_stairs(n: i32) -> i32 {
         if n < 3 {
             return n;
@@ -38,6 +31,14 @@ impl Solution {
 
 
         step_ways[n as usize] as i32
+    }
+
+    pub fn climb_stairs_recurse(n: i32) -> i32 {
+        if 0 <= n && n <= 2 {
+            return n;
+        }
+
+        Self::climb_stairs(n - 1) + Self::climb_stairs(n - 2)
     }
 }
 

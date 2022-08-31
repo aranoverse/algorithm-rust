@@ -2,7 +2,7 @@ use crate::solution::Solution;
 use std::collections::HashMap;
 
 impl Solution {
-    /// https://leetcode.cn/problems/two-sum/
+    /// https://leetcode.com/problems/two-sum
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut indexies: Vec<i32> = Vec::with_capacity(2);
         let mut num_to_index = HashMap::with_capacity(nums.len());
