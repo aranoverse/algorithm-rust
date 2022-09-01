@@ -1,6 +1,4 @@
-mod two_sum;
-mod is_palindrome;
-mod climb_stairs;
-mod jump_game;
+mod dynamic_programming;
+mod normal;
 
 pub struct Solution;
