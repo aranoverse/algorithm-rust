@@ -47,7 +47,6 @@ mod tests {
     use crate::solution::Solution;
     use test_case::test_case;
 
-
     #[test_case(2, 2;)]
     #[test_case(3, 3;)]
     #[test_case(4, 5;)]
