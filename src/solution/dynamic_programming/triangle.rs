@@ -66,7 +66,7 @@ mod tests {
     use crate::solution::Solution;
     use test_case::test_case;
 
-    #[test_case([[2].to_vec(), [3, 4].to_vec(), [6, 5, 7].to_vec(), [4, 1, 8, 3].to_vec()].to_vec(), 11; 1)]
+    #[test_case([[2].to_vec(), [3, 4].to_vec(), [6, 5, 7].to_vec(), [4, 1, 8, 3].to_vec()].to_vec(), 11; "case 1")]
     fn test_minimum_total(triangle: Vec<Vec<i32>>, minimum_total: i32) {
         assert_eq!(Solution::minimum_total(triangle), minimum_total);
     }
