@@ -1,5 +1,5 @@
 use std::ops::Add;
-use std::process::id;
+
 use crate::solution::Solution;
 
 impl Solution {
@@ -21,16 +21,32 @@ impl Solution {
 
         min_steps[nums.len() - 1]
     }
+
+    pub fn jump_v2(nums: Vec<i32>) -> i32 {
+        let mut min_steps = vec![0 as i32; nums.len()];
+
+        for idx in 1..nums.len() {
+            let mut step = 0;
+            while idx - step > nums[step] as usize {
+                step = step + 1;
+            }
+            min_steps[idx] = min_steps[step] + 1;
+        }
+
+        min_steps[nums.len() - 1]
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::solution::Solution;
     use test_case::test_case;
+
+    use crate::solution::Solution;
 
     #[test_case([2, 3, 1, 1, 4].to_vec(), 2; "case 1")]
     #[test_case([2, 3, 1, 1, 4, 0, 1, 3].to_vec(), 3; "case 2")]
     fn test_can_jump(nums: Vec<i32>, min_step: i32) {
-        assert_eq!(Solution::jump(nums), min_step);
+        assert_eq!(Solution::jump(nums.clone()), min_step);
+        assert_eq!(Solution::jump_v2(nums), min_step);
     }
 }
