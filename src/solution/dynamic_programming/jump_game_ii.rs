@@ -26,11 +26,11 @@ impl Solution {
         let mut min_steps = vec![0 as i32; nums.len()];
 
         for idx in 1..nums.len() {
-            let mut step = 0;
-            while idx - step > nums[step] as usize {
-                step = step + 1;
+            let mut steps = 0;
+            while idx - steps > nums[steps] as usize {
+                steps = steps + 1;
             }
-            min_steps[idx] = min_steps[step] + 1;
+            min_steps[idx] = min_steps[steps] + 1;
         }
 
         min_steps[nums.len() - 1]
