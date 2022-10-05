@@ -1,4 +1,3 @@
-use std::process::id;
 use crate::solution::Solution;
 
 impl Solution {
@@ -28,7 +27,7 @@ impl Solution {
                 continue;
             }
 
-            if idx > 0 && grid_ways[idx - 1][0] == 0{
+            if idx > 0 && grid_ways[idx - 1][0] == 0 {
                 grid_ways[idx][0] = 0;
                 continue;
             }
