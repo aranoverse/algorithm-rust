@@ -30,3 +30,25 @@ pub fn dfs(node: &Option<Rc<RefCell<TreeNode>>>, depth: i32) -> i32 {
     }
     depth_now
 }
+
+pub fn dfs_v2(node: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    let mut depth_now = 0;
+    if let Some(node) = node {
+        let left = node.borrow().left.clone();
+        let right = node.borrow().right.clone();
+
+
+        let depth_left = dfs(&left);
+        let depth_right = dfs(&right);
+
+        depth_now = if depth_left == -1 || depth_right == -1 || depth_left - depth_right > 1 || depth_right - depth_left > 1 {
+            -1
+        } else if depth_left > depth_right {
+            depth_left + 1
+        } else {
+            depth_right + 1
+        }
+    }
+
+    depth_now
+}
