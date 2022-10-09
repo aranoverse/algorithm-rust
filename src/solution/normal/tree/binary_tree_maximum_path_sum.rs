@@ -1,5 +1,7 @@
+use std::borrow::BorrowMut;
 use std::rc::Rc;
 use std::cell::RefCell;
+use std::ops::Add;
 
 use crate::solution::Solution;
 use crate::solution::normal::tree::TreeNode;
@@ -7,32 +9,25 @@ use crate::solution::normal::tree::TreeNode;
 
 impl Solution {
     pub fn max_path_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        dfs_max_path_sum(&root).unwrap()
+        let mut max_path_sum = i32::MIN;
+        dfs_max_path_sum(&root, &mut max_path_sum);
+        max_path_sum
     }
 }
 
-pub fn dfs_max_path_sum(node: &Option<Rc<RefCell<TreeNode>>>) -> Option<i32> {
-    return if let Some(node) = node {
+pub fn dfs_max_path_sum(node: &Option<Rc<RefCell<TreeNode>>>, max_path_sum: &mut i32) -> (i32) {
+    let mut sum = 0;
+    if let Some(node) = node {
         let left = node.borrow().left.clone();
         let right = node.borrow().right.clone();
 
-        let left_sum = dfs_max_path_sum(&left);
-        let right_sum = dfs_max_path_sum(&right);
+        // If less than zero , do not add
+        let left_sum = dfs_max_path_sum(&left, max_path_sum).max(0);
+        let right_sum = dfs_max_path_sum(&right, max_path_sum).max(0);
 
-        let mut sum = node.borrow().val;
+        *max_path_sum = (*max_path_sum).max(left_sum + right_sum + node.borrow().val);
+        sum = left_sum.max(right_sum) + node.borrow().val;
+    }
 
-        if left_sum.is_some() && right_sum.is_some() {
-            let left_sum = left_sum.unwrap();
-            let right_sum = right_sum.unwrap();
-            sum = left_sum.max(right_sum).max(left_sum + right_sum + sum).max(sum).max(sum + left_sum).max(sum + right_sum);
-        } else if left_sum.is_some() && right_sum.is_none() {
-            let left_sum = left_sum.unwrap();
-            sum = left_sum.max(left_sum + sum).max(sum);
-        } else if left_sum.is_none() && right_sum.is_some() {
-            let right_sum = right_sum.unwrap();
-            sum = right_sum.max(right_sum + sum).max(sum);
-        }
-
-        Some(sum)
-    } else { None };
+    sum
 }
