@@ -1,5 +1,6 @@
 mod binary_balance_tree;
 mod maximum_depth_of_binary_tree;
+mod binary_tree_maximum_path_sum;
 
 use std::cell::RefCell;
 use std::rc::Rc;
