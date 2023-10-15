@@ -1,9 +1,8 @@
-use std::rc::Rc;
 use std::cell::RefCell;
-use std::ops::Sub;
+use std::rc::Rc;
 
-use crate::solution::Solution;
 use crate::solution::normal::tree::TreeNode;
+use crate::solution::Solution;
 
 impl Solution {
     pub fn is_balanced(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
@@ -38,8 +37,8 @@ pub fn dfs_v2(node: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
         let right = node.borrow().right.clone();
 
 
-        let depth_left = dfs(&left);
-        let depth_right = dfs(&right);
+        let depth_left = dfs_v2(&left);
+        let depth_right = dfs_v2(&right);
 
         depth_now = if depth_left == -1 || depth_right == -1 || depth_left - depth_right > 1 || depth_right - depth_left > 1 {
             -1
